@@ -224,12 +224,34 @@ export default function ListeDemandes() {
 
   useEffect(() => {
     if (!numero) return
-    setChargement(true)
-    setErreur(null)
-    verifierNumero(numero)
-      .then((data) => setDemandes(data))
-      .catch((err) => setErreur(err.message))
-      .finally(() => setChargement(false))
+
+    let cancelled = false
+
+    async function loadDemandes() {
+      setChargement(true)
+      setErreur(null)
+
+      try {
+        const data = await verifierNumero(numero)
+        if (!cancelled) {
+          setDemandes(data)
+        }
+      } catch (error) {
+        if (!cancelled) {
+          setErreur(error instanceof Error ? error.message : 'Erreur inconnue')
+        }
+      } finally {
+        if (!cancelled) {
+          setChargement(false)
+        }
+      }
+    }
+
+    loadDemandes()
+
+    return () => {
+      cancelled = true
+    }
   }, [numero])
 
   return (
