@@ -341,15 +341,15 @@ function toOptions(data) {
 }
 
 function createFormBody(form, pieces, selectedPieces) {
-  const body = new URLSearchParams()
+  const body = {}
 
   Object.entries(form).forEach(([key, value]) => {
-    body.append(key, value)
+    body[key] = value
   })
 
   pieces.forEach((piece) => {
     const pieceId = String(getItemValue(piece))
-    body.append(`pieceStatut_${pieceId}`, selectedPieces[pieceId] ? 'true' : 'false')
+    body[`pieceStatut_${pieceId}`] = selectedPieces[pieceId] ? true : false
   })
 
   return body
