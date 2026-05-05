@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const styles = {
   root: {
@@ -156,6 +156,38 @@ const styles = {
     background: '#7a95ab',
     cursor: 'not-allowed',
   },
+  createNewSection: {
+    marginTop: '2rem',
+    padding: '1.5rem',
+    background: '#f0f6ff',
+    border: '1px solid #d1dce8',
+    borderRadius: '10px',
+    textAlign: 'center',
+    width: '100%',
+    maxWidth: '900px',
+  },
+  createNewTitle: {
+    fontSize: '14px',
+    fontWeight: 600,
+    color: '#0f2d52',
+    margin: '0 0 0.75rem 0',
+  },
+  createNewBtn: {
+    padding: '10px 24px',
+    fontSize: '14px',
+    fontWeight: 600,
+    fontFamily: "'DM Sans', Arial, sans-serif",
+    color: '#ffffff',
+    background: '#10b981',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+    transition: 'background 0.15s',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    textDecoration: 'none',
+  },
 }
 
 export default function Form() {
@@ -270,6 +302,22 @@ export default function Form() {
             </button>
           </div>
         </form>
+      </div>
+
+      {/* Create New Section */}
+      <div style={styles.createNewSection}>
+        <p style={styles.createNewTitle}>Nouvelle demande ?</p>
+        <Link
+          to="/insertion"
+          style={styles.createNewBtn}
+          onMouseEnter={(e) => (e.currentTarget.style.background = '#059669')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = '#10b981')}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 5v14M5 12h14" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Créer une demande
+        </Link>
       </div>
     </div>
   )

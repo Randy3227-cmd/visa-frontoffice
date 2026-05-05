@@ -1,0 +1,472 @@
+/* Light Theme form specific CSS appended to the end of App.css */
+
+.page-light {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #eef3f8;
+    color: #1a2535;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+}
+
+/* ── Top bar ── */
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #d1dce8;
+}
+
+.top-bar-icon {
+    width: 44px;
+    height: 44px;
+    background: #0f2d52;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.top-bar-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.top-bar-text h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f2d52;
+    line-height: 1.2;
+    margin: 0;
+    -webkit-text-fill-color: #0f2d52;
+    background: none;
+}
+
+.top-bar-text p {
+    font-size: 13px;
+    color: #4b6278;
+    margin-top: 2px;
+}
+
+.back-link {
+    margin-left: auto;
+    font-size: 13px;
+    color: #1d6fbf;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    color: #1d6fbf;
+}
+
+/* ── Steps indicator ── */
+.steps {
+    display: flex;
+    max-width: 760px;
+    margin: 0 auto 1.75rem;
+    gap: 0;
+}
+
+.step {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #7a95ab;
+    position: relative;
+}
+
+.step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid #d1dce8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    background: #ffffff;
+    color: #7a95ab;
+    margin-right: 6px;
+}
+
+.step.active .step-num {
+    background: #0f2d52;
+    border-color: #0f2d52;
+    color: #fff;
+}
+
+.step.active {
+    color: #0f2d52;
+    font-weight: 500;
+}
+
+.step-line {
+    flex: 1;
+    height: 1px;
+    background: #d1dce8;
+    margin: 0 8px;
+}
+
+/* ── Form layout ── */
+.form-light {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.form-light fieldset {
+    background: #ffffff;
+    border: 1px solid #d1dce8;
+    border-radius: 10px;
+    padding: 0;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+}
+
+.form-light legend {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f2d52;
+    background: #f0f6ff;
+    border-bottom: 1px solid #d1dce8;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    float: none;
+    margin: 0;
+}
+
+.form-light .fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem 1.25rem;
+    padding: 1.25rem;
+}
+
+.form-light .field-full {
+    grid-column: 1 / -1;
+}
+
+.form-light .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-light label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b6278;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.form-light input[type="text"],
+.form-light input[type="email"],
+.form-light input[type="date"],
+.form-light select,
+.form-light textarea {
+    width: 100%;
+    padding: 9px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #1a2535;
+    background: #ffffff;
+    border: 1px solid #d1dce8;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-light input[type="date"] {
+    font-family: monospace;
+}
+
+.form-light input:focus,
+.form-light select:focus,
+.form-light textarea:focus {
+    border-color: #1d6fbf;
+    box-shadow: 0 0 0 3px rgba(29, 111, 191, 0.12);
+}
+
+.form-light select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b6278' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+.form-light select option {
+    background: #ffffff;
+    color: #000;
+}
+
+.form-light textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ── Pieces justificatives ── */
+.form-light #piecesFieldset {
+    border-left: 3px solid #c49a28;
+}
+
+.form-light #piecesFieldset legend {
+    background: #fef9ec;
+    color: #7a5a00;
+}
+
+.form-light #piecesHint {
+    font-size: 13px;
+    color: #4b6278;
+    padding: 0.75rem 1.25rem 0;
+}
+
+.form-light #piecesContainer {
+    padding: 0.75rem 1.25rem 1rem;
+}
+
+.form-light #piecesContainer .piece-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1dce8;
+    margin-bottom: 8px;
+    background: #fafcff;
+}
+
+.form-light #piecesContainer .piece-item:last-child {
+    margin-bottom: 0;
+}
+
+.form-light #piecesContainer label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a2535;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-light input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #0f2d52;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* ── Submit button ── */
+.form-light .form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.btn-secondary-light {
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #4b6278;
+    background: transparent;
+    border: 1px solid #d1dce8;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.btn-secondary-light:hover {
+    background: #eef3f8;
+}
+
+.btn-submit {
+    padding: 10px 24px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #0f2d52;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.15s;
+}
+
+.btn-submit:hover {
+    background: #1a4580;
+}
+
+.btn-submit::after {
+    content: '→';
+}
+
+/* ── Loading state ── */
+.spinner-light {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #d1dce8;
+    border-top-color: #0f2d52;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 40px auto;
+}
+/* Light Mode general overrides */
+.card-light {
+    background: #ffffff;
+    border: 1px solid #d1dce8;
+    border-radius: 10px;
+    padding: 36px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.brand-light h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f2d52;
+}
+.brand-light p {
+    font-size: 0.8rem;
+    color: #4b6278;
+    margin-top: 2px;
+}
+
+/* Tabs Light */
+.tabs-light {
+    display: flex;
+    gap: 8px;
+    background: #eef3f8;
+    padding: 6px;
+    border-radius: 6px;
+    margin-bottom: 28px;
+}
+.tab-light {
+    flex: 1; padding: 10px 8px;
+    border: none;
+    background: transparent;
+    color: #4b6278;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+.tab-light.active {
+    background: #ffffff;
+    color: #0f2d52;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Inputs Light */
+.input-light {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1dce8;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #1a2535;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s;
+}
+.input-light:focus {
+    border-color: #1d6fbf;
+    box-shadow: 0 0 0 3px rgba(29, 111, 191, 0.12);
+}
+
+/* Buttons Light */
+.btn-primary-light {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 28px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    background: #0f2d52;
+    color: #fff;
+    width: 100%;
+    transition: background 0.2s;
+}
+.btn-primary-light:hover {
+    background: #1a4580;
+}
+.btn-ghost-light {
+    background: transparent;
+    color: #1d6fbf;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 12px;
+}
+
+/* Timeline Light */
+.timeline-dot-light {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #0f2d52;
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0;
+    z-index: 1;
+}
+
+.demande-card-light {
+    background: #ffffff;
+    border: 1px solid #d1dce8;
+    border-radius: 6px;
+    padding: 20px 24px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block; color: inherit;
+    transition: all 0.2s;
+}
+.demande-card-light:hover {
+    border-color: #1d6fbf;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+}
+.badge-light-blue { background: #eef3f8; color: #1d6fbf; border: 1px solid #d1dce8; }
+.badge-light-green { background: #e6fdf0; color: #008f4c; border: 1px solid #b3efd4; }
+.badge-light-red { background: #ffebee; color: #d32f2f; border: 1px solid #ffcdd2; }
+
+.section-title-light {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4b6278;
+    font-weight: 600;
+    margin: 28px 0 14px;
+    display: flex; align-items: center; gap: 8px;
+}
+.section-title-light::after {
+    content: '';flex: 1; height: 1px; background: #d1dce8;
+}
+
