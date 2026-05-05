@@ -35,7 +35,7 @@ export default function QRCodePage() {
                     </div>
 
                     <div style={{ marginTop: '36px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <Link to={`/demande/${id}`} className="btn-primary-light">
+                        <Link to={`/demandes/${id}`} className="btn-primary-light">
                             Voir le statut maintenant
                         </Link>
                         <Link to="/" className="btn-ghost-light">
