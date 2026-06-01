@@ -105,8 +105,10 @@ const s = {
   spinner: {
     width: '28px',
     height: '28px',
-    border: '3px solid #d1dce8',
-    borderTop: '3px solid #1d6fbf',
+    borderWidth: '3px',
+    borderStyle: 'solid',
+    borderColor: '#d1dce8',
+    borderTopColor: '#1d6fbf',
     borderRadius: '50%',
     animation: 'spin 0.8s linear infinite',
   },
