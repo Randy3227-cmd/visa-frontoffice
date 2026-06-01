@@ -337,6 +337,27 @@ export default function ListeDemandes() {
               </div>
             </div>
 
+            <div style={{ padding: '12px 20px', borderTop: '1px solid #d1dce8', display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                onClick={() => navigate(`/demande/${d.id}`)}
+                style={{
+                  padding: '6px 16px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  background: '#0f2d52',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  transition: 'background 0.15s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#1a4580'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#0f2d52'}
+              >
+                Détails
+              </button>
+            </div>
+
           </div>
         ))}
 

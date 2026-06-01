@@ -19,3 +19,7 @@ export const getPiecesByTypeVisa = (idTypeVisa) =>
 
 export const submitDemande = (formData) =>
     axios.post(`${BASE_URL}/demande/submit`, formData).then(r => r.data);
+
+export const updatePhotoSignature = (id, data) =>
+    axios.put(`${BASE_URL}/demande/${id}/photo-signature`, data).then(r => r.data);
+
