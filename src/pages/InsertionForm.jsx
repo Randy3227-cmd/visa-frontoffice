@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { getFormData, submitDemande, getPiecesByTypeVisa } from '../api/insertionApi';
+import { getFormData, submitDemande, getPiecesByTypeVisa, uploadPiecesJustificatives } from '../api/insertionApi';
 import '../App-light.css';
 
 export default function DemandeFormPage() {
@@ -20,6 +20,9 @@ export default function DemandeFormPage() {
 
     const [piecesList, setPiecesList] = useState([]);
     const [pieces, setPieces] = useState({});
+    const [pieceFiles, setPieceFiles] = useState({});
+
+    const selectedPiecesCount = piecesList.filter(p => pieces[`pieceStatut_${p.id}`]).length;
 
     useEffect(() => {
         getFormData().then(data => {
@@ -36,6 +39,7 @@ export default function DemandeFormPage() {
         if (!form.typeVisaId) {
             setPiecesList([]);
             setPieces({});
+            setPieceFiles({});
             return;
         }
         getPiecesByTypeVisa(form.typeVisaId).then(piecesData => {
@@ -43,13 +47,20 @@ export default function DemandeFormPage() {
             const p = {};
             piecesData.forEach(pc => { p[`pieceStatut_${pc.id}`] = false; });
             setPieces(p);
+            setPieceFiles({});
         }).catch(err => {
+            setError(err.message || 'Impossible de charger les pièces justificatives');
             console.error("Error loading pieces", err);
         });
     }, [form.typeVisaId]);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
     const handlePieceChange = (e) => setPieces({ ...pieces, [e.target.name]: e.target.checked });
+    const handlePieceFileChange = (pieceId, file) => {
+        const key = `pieceStatut_${pieceId}`;
+        setPieceFiles(prev => ({ ...prev, [pieceId]: file || null }));
+        setPieces(prev => ({ ...prev, [key]: Boolean(file) || prev[key] }));
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,7 +74,20 @@ export default function DemandeFormPage() {
             });
 
             const res = await submitDemande(payload);
+
+            console.log("Resultat");
+            console.log(res);
+            
             if (res.success && res.demandeId) {
+                const filesToUpload = Object.entries(pieceFiles).filter(([, file]) => file instanceof File);
+                if (filesToUpload.length > 0) {
+                    const piecesFormData = new FormData();
+                    filesToUpload.forEach(([pieceId, file]) => {
+                        piecesFormData.append(`pieceFile_${pieceId}`, file, file.name);
+                    });
+
+                    await uploadPiecesJustificatives(res.demandeId, piecesFormData);
+                }
                 navigate(`/form/success/${res.demandeId}`);
             } else {
                 setError(res.message || 'Erreur inconnue');
@@ -188,21 +212,52 @@ export default function DemandeFormPage() {
                 {piecesList.length > 0 && (
                     <fieldset id="piecesFieldset">
                         <legend>&#128206;&nbsp; Pièces justificatives</legend>
-                        <p id="piecesHint">Cochez les pièces fournies.</p>
+                        <div className="pieces-summary">
+                            <div>
+                                <strong>Documents à déclarer</strong>
+                                <p id="piecesHint">Cochez uniquement les pièces déjà fournies pour cette demande.</p>
+                            </div>
+                            <div className="pieces-counter">
+                                {selectedPiecesCount} / {piecesList.length} sélectionnée{selectedPiecesCount > 1 ? 's' : ''}
+                            </div>
+                        </div>
                         <div id="piecesContainer">
                             {piecesList.map(p => (
-                                <div className="piece-item" key={p.id}>
-                                    <label>
+                                <label className={`piece-card ${pieces[`pieceStatut_${p.id}`] ? 'selected' : ''}`} key={p.id}>
+                                    <div className="piece-card-main">
                                         <input
                                             type="checkbox"
                                             name={`pieceStatut_${p.id}`}
                                             checked={pieces[`pieceStatut_${p.id}`] || false}
                                             onChange={handlePieceChange}
                                         />
-                                        {p.libelle}
-                                    </label>
-                                </div>
+                                        <div className="piece-card-content">
+                                            <span className="piece-card-title">{p.libelle}</span>
+                                            <span className="piece-card-desc">Document justificatif demandé pour le type de visa sélectionné.</span>
+                                            <input
+                                                className="piece-file-input"
+                                                type="file"
+                                                accept=".pdf,.png,.jpg,.jpeg"
+                                                onChange={(e) => handlePieceFileChange(p.id, e.target.files?.[0] || null)}
+                                                disabled={!pieces[`pieceStatut_${p.id}`]}
+                                            />
+                                            <span className="piece-file-name">
+                                                {pieceFiles[p.id]?.name || 'Aucun fichier sélectionné'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span className="piece-card-status">{pieces[`pieceStatut_${p.id}`] ? 'Fourni' : 'À fournir'}</span>
+                                </label>
                             ))}
+                        </div>
+                    </fieldset>
+                )}
+
+                {form.typeVisaId && piecesList.length === 0 && (
+                    <fieldset id="piecesFieldset">
+                        <legend>&#128206;&nbsp; Pièces justificatives</legend>
+                        <div className="pieces-empty">
+                            Aucune pièce n’est associée à ce type de visa pour le moment.
                         </div>
                     </fieldset>
                 )}

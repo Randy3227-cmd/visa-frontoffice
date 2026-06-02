@@ -333,6 +333,13 @@ export default function ListeDemandes() {
               <div style={s.grid}>
                 <Field label="Nom" value={d.nomDemandeur} />
               </div>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, padding: '0.75rem 1.25rem' }}>
+                <button
+                  onClick={() => navigate(`/demande/${d.id}`)}
+                  style={{ padding: '8px 12px', borderRadius: 6, border: '1px solid #d1dce8', background: '#ffffff', cursor: 'pointer' }}>
+                  Détails
+                </button>
+              </div>
             </div>
 
           </div>
